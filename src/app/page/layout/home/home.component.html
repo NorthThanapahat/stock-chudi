@@ -1,0 +1,270 @@
+<div class="full-body bg-light-theme">
+  <app-navbar></app-navbar>
+
+  <div class="col-8 offset-2 row  margin-top-20">
+    <div class="col-4">
+      <form class="form-inline col-12">
+        <div class="inner-addon left-addon w-100">
+          <i class="glyphicon fas fa-search text-gray"></i>
+          <input type="text" class="form-control border-15 w-100" placeholder="รหัสสินค้า" name="search"
+            (keyup)="SearchItem($event.target.value)" />
+        </div>
+      </form>
+    </div>
+    <div class="col-4">
+      <div class="form-group row no-margin">
+        <label for="inputPassword" class="col-sm-5 col-form-label no-padding">ประเภทสินค้า</label>
+        <div class="col-sm-6 col-6">
+          <select class="form-control" name="productTypeFilter" (change)="FilterProductType()" [(ngModel)]="filter.productType">
+            <option *ngFor="let item of productTypeList" value="{{item.id}}">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+        <div class="form-group row no-margin">
+          <label for="inputPassword" class="col-sm-5 col-form-label no-padding">สถานะ</label>
+          <div class="col-sm-6 col-6">
+            <select class="form-control" name="customerRef" [(ngModel)]="filter.productType">
+              <option>ทั้งหมด</option>
+              <option>Sold Out</option>
+              <option>มีลูกค้าแล้ว</option>
+              <option>ยังไม่มีลูกค้า</option>
+              
+            </select>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="col-sm-2 offset-sm-10 margin-top-10">
+    <button class="form-control btn btn-theme font-size-20" (click)="NewProduct()">สร้างสินค้า</button>
+  </div>
+  <div class="container">
+
+    <div class="title">
+      สินค้า
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr class="text-center">
+          <th scope="col">รหัสสินค้า</th>
+          <th scope="col">ชื่อสินค้า</th>
+          <th scope="col">ราคาสินค้า (บาท)</th>
+          <th scope="col">สถานะการจ่าย</th>
+          <th scope="col">สถานะการส่ง</th>
+          <th scope="col">ลบ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of productList | slice: (pageNum-1) * 10 : (pageNum-1) * 10 + 10" class="text-center">
+          <td>{{item.data.productId}}</td>
+          <td>{{item.data.productName}}</td>
+          <td>{{item.data.productPrice |  number:'.2'}} ฿</td>
+          <td *ngIf="item.data.isPaid"><span class="text-danger"><b>Sold Out</b></span></td>
+          <!-- <td *ngIf=""> -->
+          <td *ngIf=" !item.data.isPaid && item.data.isCustomer">มีลูกค้าแล้ว</td>
+          <td *ngIf=" !item.data.isPaid && !item.data.isCustomer">ยังไม่มีลูกค้า</td>
+
+          <!-- </td> -->
+          <td *ngIf="item.data.isShipping">ส่งแล้ว</td>
+          <td *ngIf="!item.data.isShipping">ยังไม่ส่ง</td>
+          <td><i (click)="EditProduct(item)" class="fas fa-edit link"></i> | <i (click)="Delete(item)"
+              class="fas fa-trash-alt link"></i></td>
+        </tr>
+
+      </tbody>
+    </table>
+    <!-- <div *ngFor="let item of productList" class="col-sm-3">
+      <img src="{{item.data.productImageUrl}}" class="w-100" alt="">
+      <div>{{item.productName}}</div>
+      <div>{{item.productPrice}}</div>
+    </div> -->
+    <div *ngIf="productList.length == 0" class="col-sm-12 font-size-48 text-center">
+      ไม่มีสินค้า
+    </div>
+    <div class="col-12 justify-content-center">
+      <ngb-pagination [(page)]="pageNum" [pageSize]="10"  [collectionSize]="productList?.length">
+      </ngb-pagination>
+    </div>
+  </div>
+  <modal #myModal class="bg-light-theme">
+    <modal-header class="col-12 no-padding">
+
+      <h5 class="modal-title  col-sm-12 text-center  text-white float-left" id="exampleModalLongTitle">
+        <span>รายละเอียดสินค้า</span>
+      </h5>
+      <button type="button" class="close no-margin ab" (click)="CloseModal()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </modal-header>
+    <modal-content class="bg-light-theme ">
+      <div class="modal-content">
+        <aside class="col-sm-12 container no-margin-padding bg-light-theme">
+          <div class="text-center justify-content-center d-flex">
+            <input type="file" name="" id="" #uploader (change)="uploadFile($event)" accept="image/*" hidden>
+            <div class=" bg-white padding relative image-upload" [ngClass]="{'border-err': err.productImageName}"
+              (click)="uploader.click()">
+              <img class=" image-cover content-center" src="{{image}}" height="200px"  alt="">
+            </div>
+
+          </div>
+          <div class="container padding">
+            <div class="form-group row no-margin margin-top-20">
+              <label for="inputPassword" class="col-sm-3 col-form-label no-padding">ประเภทสินค้า</label>
+              <div class="col-sm-8 col-8">
+                <select class="form-control" name="productType" [(ngModel)]="product.productType"
+                  (change)="SelectType($event.target.value)">
+                  <option *ngFor="let productType of productTypeList" value="{{productType.id}}">{{productType.name}}
+                  </option>
+
+                </select>
+              </div>
+            </div>
+            <div class="form-group row no-margin margin-top-10">
+              <label for="inputPassword" class="col-sm-3 col-form-label no-padding">รหัสสินค้า</label>
+              <div class="col-sm-8 col-8">
+                <input type="text" class="form-control" disabled name="productId" [ngClass]="{'is-invalid': err.productId}"
+                  [(ngModel)]="product.productId">
+              </div>
+            </div>
+            <div class="form-group row no-margin margin-top-10">
+              <label for="inputPassword" class="col-sm-3 col-form-label no-padding">ชื่อสินค้า</label>
+              <div class="col-sm-8 col-8">
+                <input type="text" class="form-control" name="productName" [ngClass]="{'is-invalid': err.productName}"
+                  [(ngModel)]="product.productName">
+              </div>
+            </div>
+            <div class="form-group row no-margin margin-top-10">
+              <label for="inputPassword" class="col-sm-3 col-form-label no-padding">ราคา</label>
+              <div class="col-sm-8 col-8">
+                <input type="text" class="form-control" name="productPrice" [ngClass]="{'is-invalid': err.productPrice}"
+                  [(ngModel)]="product.productPrice">
+              </div>
+            </div>
+            <div class="form-group row no-margin margin-top-10">
+              <label for="inputPassword" class="col-sm-3 col-form-label no-padding">หมายเหตุ</label>
+              <div class="col-sm-8 col-8">
+                <input type="text" class="form-control" name="remark" [ngClass]="{'is-invalid': err.remark}"
+                  [(ngModel)]="product.remark">
+              </div>
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" (change)="HaveCustomer($event.target.checked)"
+                [(ngModel)]="product.isCustomer" name="iscustomer" [checked]="product.isCustomer" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">มีลูกค้าแล้ว</label>
+            </div>
+            <div *ngIf="product.isCustomer">
+              <div class="form-group row no-margin margin-top-10">
+                <label for="inputPassword" class="col-sm-3 col-form-label no-padding">ชื่อลูกค้า</label>
+                <div class="col-sm-8 col-8">
+                  <input type="text" class="form-control" name="customerName"
+                    [ngClass]="{'is-invalid': err.customerName}" [(ngModel)]="product.customerName">
+                </div>
+              </div>
+              <div class="form-group row no-margin margin-top-10">
+                <label for="inputPassword" class="col-sm-3 col-form-label no-padding">ที่อยู่ลูกค้า</label>
+                <div class="col-sm-8 col-8">
+                  <input type="text" class="form-control" name="customerAddress"
+                    [ngClass]="{'is-invalid': err.customerAddress}" [(ngModel)]="product.customerAddress">
+                </div>
+              </div>
+              <div class="form-group row no-margin margin-top-10">
+                <label for="inputPassword" class="col-sm-3 col-form-label no-padding">เบอร์โทรศัพท์ลูกค้า</label>
+                <div class="col-sm-8 col-8">
+                  <input type="text" class="form-control" name="customerPhoneNumber"
+                    [ngClass]="{'is-invalid': err.customerPhoneNumber}" [(ngModel)]="product.customerPhoneNumber">
+                </div>
+              </div>
+              <div class="form-group row no-margin margin-top-20">
+                <label for="inputPassword" class="col-sm-3 col-form-label no-padding">คนรับออเดอร์</label>
+                <div class="col-sm-8 col-8">
+                  <select class="form-control" name="customerRef" [(ngModel)]="product.customerRef"
+                    [ngClass]="{'is-invalid': err.customerRef}" (change)="SelectType($event.target.value)">
+                    <option disabled>กรุณาเลือก</option>
+                    <option>มิ้ง</option>
+                    <option>ปานา</option>
+                    <option>ตังเม</option>
+                    <option>เอิน</option>
+                    <option>โบว์</option>
+                    <option>ฟาง</option>
+                    <option>เฟิน</option>
+                    <option>โรส</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row no-margin">
+                <div class="col-sm-12 col-12">
+                  <div class="form-group row no-margin margin-top-10">
+                    <label for="inputPassword" class="col-sm-3 col-form-label no-padding">วันที่ซื้อ
+                    </label>
+                    <div class="col-sm-8 col-8">
+                      <mat-form-field class="col-12  no-padding">
+                        <input [(ngModel)]="saleDate" name="saleDate" [ngClass]="{'is-invalid': err.saleDate}"
+                          (dateInput)="addEvent('input', $event.target.value)"
+                          (dateChange)="addEvent('change', $event.target.value)" class="font-size-15 form-control"
+                          matInput [matDatepicker]="SaleDate">
+                        <mat-datepicker-toggle matSuffix [for]="SaleDate"></mat-datepicker-toggle>
+                        <mat-datepicker #SaleDate></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" [(ngModel)]="product.isPaid" name="isPaid"
+                  [checked]="product.isPaid" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">จ่ายเงินแล้ว</label>
+              </div>
+              <div *ngIf="product.isPaid">
+                <div class="form-group form-check">
+                  <input type="checkbox" class="form-check-input" [(ngModel)]="product.isShipping" name="isShipping"
+                    [checked]="product.isShipping" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">จัดส่งแล้ว</label>
+                </div>
+                <div *ngIf="product.isShipping">
+                  <div class="form-group row no-margin margin-top-10">
+                    <label for="inputPassword" class="col-sm-3 col-form-label no-padding">เลขพัสดุในการจัดส่ง </label>
+                    <div class="col-sm-8 col-8">
+                      <input type="text" class="form-control" name="trackingNumber"
+                        [ngClass]="{'is-invalid': err.trackingNumber}" [(ngModel)]="product.trackingNumber">
+                    </div>
+                  </div>
+                  <div class="form-group row no-margin">
+                    <div class="col-sm-12 col-12">
+                      <div class="form-group row no-margin margin-top-10">
+                        <label for="inputPassword" class="col-sm-3 col-form-label no-padding">วันที่จัดส่ง
+                        </label>
+                        <div class="col-sm-8 col-8">
+                          <mat-form-field class="col-12  no-padding">
+                            <input [(ngModel)]="shippingDate" name="shippingDate"
+                              [ngClass]="{'is-invalid': err.shippingDate}"
+                              (dateInput)="shippingDateEvent('input', $event.target.value)"
+                              (dateChange)="shippingDateEvent('change', $event.target.value)"
+                              class="font-size-15 form-control" matInput [matDatepicker]="ShippingDate">
+                            <mat-datepicker-toggle matSuffix [for]="ShippingDate"></mat-datepicker-toggle>
+                            <mat-datepicker #ShippingDate></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </modal-content>
+    <modal-footer class="text-center border-none  bg-light-theme">
+      <div class="text-center margin-top-20">
+        <button class="btn btn-primary" data-dismiss="modal" (click)="onSubmit()">บันทึก</button>
+        <button class="btn btn-danger margin-left" (click)="CloseModal()" data-dismiss="modal">ยกเลิก</button>
+      </div>
+    </modal-footer>
+  </modal>
+</div>

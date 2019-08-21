@@ -1,1 +1,934 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@media print {
+  .breadcrumb {
+    display: none !important;
+  }
+}
+
+@font-face {
+  font-family: 'Prompt-Regular';
+  src: url('../src/assets/font/Prompt-Regular.otf');
+}
+
+@font-face {
+  font-family: 'Prompt-Bold';
+  src: url('../src/assets/font/Prompt-Bold.otf');
+}
+
+@font-face {
+  font-family: 'TH-Saraban';
+  src: url('../src/assets/font/saraban/THSarabun.ttf');
+}
+
+@font-face {
+  font-family: 'TH-Saraban-bold';
+  src: url('../src/assets/font/saraban/THSarabunBold.ttf');
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'TH-Saraban';
+  font-size: 22px;
+  background: rgb(250, 146, 207);
+}
+
+.line {
+  border-radius: 15px;
+  height: 3px;
+  width: 250px;
+}
+
+/* display */
+
+.display-table {
+  display: table;
+}
+
+.display-table-row {
+  display: table-row;
+}
+
+/* font */
+
+.font-normal {
+  font-family: 'TH-Saraban';
+}
+
+.font-bold {
+  font-family: 'TH-Saraban-bold';
+}
+
+/* position */
+
+.bottom-right {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.bottom {
+  bottom: 20px;
+}
+
+.relative {
+  position: relative;
+}
+
+.ab {
+  position: absolute !important;
+}
+
+.z-index-1000 {
+  z-index: -1;
+}
+
+.z-index-top {
+  z-index: 0;
+}
+
+.right {
+  right: 20px;
+}
+
+.top {
+  top: 10px;
+}
+
+.center-verticle {
+  top: 50%;
+}
+
+.top-20 {
+  top: 20%;
+}
+
+.top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.top-0 {
+  top: 0;
+}
+
+/* size */
+
+.full-body {
+  height: 100%;
+  width: 100%;
+}
+
+.wt-50 {
+  width: 50px;
+}
+
+.wt-100 {
+  width: 100px;
+}
+
+.wt-150 {
+  width: 150px;
+}
+
+.wt-200 {
+  width: 200px;
+}
+
+.ht-400 {
+  height: 400px;
+}
+
+.ht-100 {
+  height: 80px;
+}
+
+.ht-200 {
+  height: 200px;
+}
+
+.mxh-400 {
+  max-height: 400px;
+}
+
+.mh-450 {
+  min-height: 450px;
+}
+
+.full-vh {
+  height: 100vh;
+}
+
+.ht-full {
+  height: 100%;
+}
+
+.w-99 {
+  width: 99%;
+}
+
+/* margin padding */
+
+.margin-auto {
+  margin: auto;
+}
+
+.parent-center {
+  position: relative;
+}
+
+.image-upload {
+  width: 220px;
+  height: 220px;
+}
+
+.content-center {
+  position: absolute;
+  /*it can be fixed too*/
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  /*this to solve "the content will not be cut when the window is smaller than the content": */
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.margin {
+  margin: 10px;
+}
+
+.padding {
+  padding: 10px;
+}
+
+.padding-20 {
+  padding: 20px;
+}
+
+.padding-tb-10 {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.padding-bottom-30 {
+  padding-bottom: 30px;
+}
+
+.padding-top-30 {
+  padding-top: 30px;
+}
+
+.margin-top-5 {
+  margin-top: 5px;
+}
+
+.margin-top--10 {
+  margin-top: -55px !important;
+}
+
+.no-margin-padding {
+  margin: 0;
+  padding: 0;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.margin-top-5p {
+  margin-top: 5%;
+}
+
+.margin-top-10p {
+  margin-top: 10%;
+}
+
+.margin-top-15p {
+  margin-top: 15%;
+}
+
+.margin-top-20p {
+  margin-top: 20%;
+}
+
+.margin-top-50p {
+  margin-top: 50%;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
+}
+
+.margin-top-30 {
+  margin-top: 30px;
+}
+
+.margin-left {
+  margin-left: 10px;
+}
+
+.margin-left-20 {
+  margin-left: 20px;
+}
+
+.margin-left-15p {
+  margin-left: 15%;
+}
+
+.margin-left-25p {
+  margin-left: 25%;
+}
+
+.margin-left-30p {
+  margin-left: 30%;
+}
+
+.margin-right-5 {
+  margin-right: 5px;
+}
+
+.margin-right {
+  margin-right: 5px;
+}
+
+.margin-right-15p {
+  margin-right: 15%;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+
+.margin-bottom-30 {
+  margin-bottom: 30px;
+}
+
+.margin-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.padding-left-10 {
+  padding-left: 10px;
+}
+
+.margin-side {
+  margin: 10px 15px 15px 10px;
+}
+
+.padding-side {
+  padding: 10px 25px 10px 25px;
+}
+
+.padding-side0 {
+  padding: 0 10px;
+}
+
+/* align */
+
+.verticle-middle {
+  vertical-align: middle;
+}
+
+/* border */
+
+.border-circle {
+  border-radius: 50%;
+  background: rgb(236, 221, 221);
+}
+
+.border-none {
+  border: none;
+}
+
+.line-verticle {
+  height: 50px;
+  width: 1px;
+  background: #a4a8b3;
+}
+
+.border-15 {
+  border-radius: 15px !important;
+}
+
+.border-radius-white {
+  border: 1px solid #eee;
+  border-radius: 15px;
+}
+
+.border-radius {
+  border: 2px solid #0400ac;
+  border-radius: 15px;
+}
+
+.border-radius-2 {
+  border-radius: 10px;
+  border: 2px solid #001a66 !important;
+}
+
+.border-bottom {
+  border-bottom: 15px solid #001a66 !important;
+}
+
+.border-bottom-1 {
+  border-bottom: 1px solid #001a66 !important;
+}
+
+.border-bottom-black-5 {
+  border-bottom: 5px solid #222 !important;
+}
+
+.border-bottom-3 {
+  border-bottom: 3px solid #001a66 !important;
+}
+
+.border-bottom-3-white {
+  border-bottom: 3px solid #fff !important;
+}
+
+.form-control-plaintext {
+  border-bottom: 1px solid #333;
+}
+
+.border-bottom-2-gray {
+  border-bottom: 1px solid grey;
+}
+
+.border-rec {
+  border: 1px solid #001a66;
+  border-radius: 10px;
+}
+
+.border-right {
+  border-right: 1px solid #001a66 !important;
+}
+
+.border-gray {
+  border: 1px solid rgb(148, 148, 148);
+}
+
+.border-shadow {
+  -webkit-box-shadow: 4px 4px 4px 0px rgba(48, 48, 48, 0.75);
+  -moz-box-shadow: 4px 4px 4px 0px rgba(48, 48, 48, 0.75);
+  box-shadow: 4px 4px 4px 0px rgba(48, 48, 48, 0.75);
+  border: 1px solid rgb(158, 158, 158);
+}
+
+/* box shadow */
+
+.box-shadow-bottom {
+  -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+/* *font-style */
+
+.underline {
+  text-decoration: underline;
+  text-decoration-color: #001a66;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+/* font-size */
+
+.font-size-12 {
+  font-size: 12px;
+}
+
+.font-size-15 {
+  font-size: 15px !important;
+}
+
+.font-size-20 {
+  font-size: 20px;
+}
+
+.font-size-25 {
+  font-size: 25px;
+}
+
+.font-size-48 {
+  font-size: 48px;
+}
+
+.font-size-60 {
+  font-size: 60px;
+}
+
+/* font-color */
+
+.text-orange {
+  color: rgb(254, 145, 1);
+}
+
+.text-yellow {
+  color: rgb(243, 208, 7);
+}
+
+.text-skybule {
+  color: rgb(2, 159, 237);
+}
+
+.text-pink {
+  color: rgb(255, 34, 145);
+}
+
+.text-green {
+  color: rgb(7, 221, 185);
+}
+
+.text-gray {
+  color: #a4a8b3;
+}
+
+.text-graylight {
+  color: #d5d6da;
+}
+
+.text-bule-violet {
+  color: #001a66;
+}
+
+.text-bule-violet-light {
+  color: #0400ac !important;
+}
+
+/* background */
+
+.bg-navbar {
+  background: rgba(209, 11, 126);
+}
+
+.bg-light-theme {
+  background: rgb(255, 241, 246);
+}
+
+.bule-violet {
+  background: #001a66;
+}
+
+.bule-violet-light {
+  background: #0400ac;
+}
+
+.bule-violet-light-white {
+  background: #7675ad;
+}
+
+.bule-violet-light-less {
+  background: #e8e8f7;
+}
+
+.bg-light {
+  background: #dee1e6 !important;
+}
+
+.bg-toolight {
+  background: #e6e6eb !important;
+}
+
+.bg-violet-less {
+  background: #b19edf;
+}
+
+.bg-white {
+  background: #fff !important;
+}
+
+.bg-black {
+  background: #000 !important;
+}
+
+.bg-blue-dark {
+  background: #223074;
+}
+
+/* button */
+
+.btn-pink {
+  color: rgb(255, 93, 187);
+  background-color: #ffdaf4;
+  border-color: #ffdaf4;
+}
+
+.btn-theme {
+  color: rgb(255, 255, 255);
+  background-color: rgb(255, 22, 142);
+  border-color: rgb(255, 22, 142);
+}
+
+.btn-theme:hover {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+.btn-theme:focus {
+  color: #fff !important;
+  text-decoration: none !important;
+  background-color: rgb(255, 22, 142);
+  border-color: rgb(255, 22, 142);
+}
+
+.mat-form-field-infix {
+  padding: 0 !important;
+  border-top: none !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding: 0 !important;
+}
+
+.btn-radius {
+  border-radius: 25px;
+}
+
+.link {
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.item {
+  height: 200px;
+  background: #d3d6df;
+  border-radius: 25px;
+}
+
+/* custom */
+
+.page-item.active .page-link {
+  background: rgb(255, 22, 142) !important;
+  border-color: rgb(255, 22, 142) !important;
+}
+
+.img-logo {
+  width: 30%;
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+  /* margin: 0; */
+  /* padding: 0; */
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.imglogo {
+  width: 100% !important;
+}
+
+.scroll-y {
+  overflow-y: scroll;
+}
+
+.my-modal {
+  max-width: 100vw !important;
+  position: absolute !important;
+  top: 0;
+}
+
+.mymodal>.modal-content>.modal-body {
+  background: rgb(255, 241, 246);
+}
+
+.mymodal>.modal-content>.modal-footer {
+  border: none;
+  background: rgb(255, 241, 246);
+}
+
+.modal-content {
+  border: none;
+}
+
+.popup-modal {
+  width: 50% !important;
+  font-family: 'TH-Saraban' !important;
+}
+
+.modal-footer {
+  justify-content: center !important;
+}
+
+.modal-header {
+  background: rgb(255, 55, 158);
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0;
+  /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  /* Firefox */
+}
+
+.number {
+  overflow: hidden;
+}
+
+.side-menu {
+  width: 100%;
+  position: fixed;
+  height: 100%;
+  padding-top: 15%;
+  z-index: -2;
+  top: 0;
+}
+
+.nav-header {
+  z-index: 0;
+}
+
+.menu-size {
+  height: 77px;
+}
+
+ngb-pagination ul {
+  justify-content: center;
+}
+
+.inner-addon {
+  position: relative;
+}
+
+.showdow-none {
+  box-shadow: none !important;
+}
+
+/* style glyph */
+
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align glyph */
+
+.left-addon .glyphicon {
+  left: 0px;
+}
+
+.right-addon .glyphicon {
+  right: 0px;
+}
+
+/* add padding  */
+
+.left-addon input {
+  padding-left: 40px;
+}
+
+.right-addon input {
+  padding-right: 40px;
+}
+
+.background-opacity-6 {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.cdk-overlay-container {
+  z-index: 999999;
+}
+
+.my-modal mat-dialog-container {
+  z-index: 999999;
+  background: rgba(4, 4, 4, 0.8);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.border-err {
+  border: 1px solid red;
+}
+
+app-loading-screen {
+  z-index: 999999;
+}
+
+.my-modal {
+  z-index: 999999;
+}
+
+.line-100 {
+  width: 98%;
+  left: 7.5px;
+  height: 5px;
+  background: #ddd;
+}
+
+.table-bordered {
+  border: 2px solid #242424 !important;
+}
+
+.table-bordered thead {
+  border-bottom: 2px solid #4e4e4e !important;
+}
+
+.table-bordered thead th {
+  border-bottom: 2px solid #888888 !important;
+}
+
+.close {
+  margin-right: 20px;
+  position: relative;
+  right: 20px;
+  color: white;
+  z-index: 999;
+}
+
+.close:hover {
+  opacity: 1;
+  color: white;
+}
+
+.close-modal {
+  position: absolute;
+  right: 20px;
+  color: white;
+  z-index: 999;
+  background: transparent;
+}
+
+.modal-xlg {
+  max-width: 950px;
+  margin: auto;
+}
+
+.modal-80p {
+  width: 80%;
+  margin: auto;
+}
+
+.table .thead-dark th {
+  color: #fff;
+  background-color: #212529;
+  border-color: #32383e;
+}
+
+.image-fit {
+  object-fit: contain;
+}
+
+.image-cover {
+  object-fit: cover;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 35px;
+  width: 35px;
+  top: -4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border: 1px solid grey;
+}
+
+input:checked+.slider {
+  background-color: #dc3545;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #dc3545;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(35px);
+  -ms-transform: translateX(35px);
+  transform: translateX(35px);
+}
+
+/* Rounded sliders */
+
+.slider.round {
+  height: 25px;
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.min-w-80>th {
+  min-width: 80px;
+}
+
+@media only screen and (max-width:600px) {
+  h2 {
+    font-size: 30px;
+  }
+  .margin-left-15p, .margin-left-20, .margin-left-30p {
+    margin: 0;
+  }
+  .img-logo {
+    width: 90%;
+  }
+  .top-20 {
+    top: 0;
+  }
+  .popup-modal {
+    width: 60%;
+  }
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+app-home {
+  width: 100%;
+  height: 100%;
+  display: table;
+}

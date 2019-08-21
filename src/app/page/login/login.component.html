@@ -1,0 +1,23 @@
+<div class="full-body relative">
+  <div class="col-sm-6 col-12 offset-sm-3 ab top-20">
+    <div class="text-center">
+      <img src="../../../assets/images/logo-w.png" class="img-logo" alt="">
+    </div>
+    <div class="border-radius-white padding">
+      <form class="text-white  col-sm-12 offset-sm-0 col-10 offset-1">
+        <div class="form-group">
+          <label for="exampleInputEmail1">ชื่อผู้ใช้งาน</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" name="username" [(ngModel)]="username" [ngClass]="{'is-invalid': error.username}">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">รหัสผ่าน</label>
+          <input type="password" class="form-control" id="exampleInputPassword1"  name="password" [(ngModel)]="password"  [ngClass]="{'is-invalid': error.password}">
+        </div>
+        <div class="w-100 text-center">
+          <button (click)="Login()" class="btn btn-pink">เข้าสู่ระบบ</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

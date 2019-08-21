@@ -1,0 +1,232 @@
+[debug] [2019-08-21T15:42:15.923Z] ----------------------------------------------------------------------
+[debug] [2019-08-21T15:42:15.927Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\iPassionDev02\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2019-08-21T15:42:15.928Z] CLI Version:   7.2.1
+[debug] [2019-08-21T15:42:15.928Z] Platform:      win32
+[debug] [2019-08-21T15:42:15.928Z] Node Version:  v10.15.3
+[debug] [2019-08-21T15:42:15.942Z] Time:          Wed Aug 21 2019 22:42:15 GMT+0700 (GMT+07:00)
+[debug] [2019-08-21T15:42:15.942Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-08-21T15:42:15.978Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-08-21T15:42:15.980Z] > authorizing via signed-in user
+[debug] [2019-08-21T15:42:15.980Z] [iam] checking project stockchudi for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-08-21T15:42:15.984Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-08-21T15:42:15.985Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-08-21T15:42:16.508Z] <<< HTTP RESPONSE 200
+[debug] [2019-08-21T15:42:16.533Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/stockchudi:testIamPermissions  
+
+[debug] [2019-08-21T15:42:18.206Z] <<< HTTP RESPONSE 200
+[debug] [2019-08-21T15:42:18.214Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/stockchudi  
+ 
+[debug] [2019-08-21T15:42:18.848Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'stockchudi'...
+[info] 
+[info] i  deploying hosting
+[debug] [2019-08-21T15:42:18.866Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/stockchudi/versions  
+
+[debug] [2019-08-21T15:42:20.842Z] <<< HTTP RESPONSE 500
+[debug] [2019-08-21T15:42:20.842Z] <<< HTTP RESPONSE BODY
+[error] 
+[error] Error: HTTP Error: 500, Internal error encountered.
+[debug] [2019-08-21T15:42:21.254Z] Error Context: {
+  "body": {
+    "error": {
+      "code": 500,
+      "message": "Internal error encountered.",
+      "status": "INTERNAL"
+    }
+  },
+  "response": {
+    "statusCode": 500,
+    "body": {
+      "error": {
+        "code": 500,
+        "message": "Internal error encountered.",
+        "status": "INTERNAL"
+      }
+    },
+    "headers": {
+      "vary": "X-Origin, Referer, Origin,Accept-Encoding",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 21 Aug 2019 15:42:21 GMT",
+      "server": "ESF",
+      "cache-control": "private",
+      "x-xss-protection": "0",
+      "x-frame-options": "SAMEORIGIN",
+      "x-content-type-options": "nosniff",
+      "alt-svc": "quic=\":443\"; ma=2592000; v=\"46,43,39\"",
+      "accept-ranges": "none",
+      "transfer-encoding": "chunked"
+    },
+    "request": {
+      "uri": {
+        "protocol": "https:",
+        "slashes": true,
+        "auth": null,
+        "host": "firebasehosting.googleapis.com",
+        "port": 443,
+        "hostname": "firebasehosting.googleapis.com",
+        "hash": null,
+        "search": null,
+        "query": null,
+        "pathname": "/v1beta1/sites/stockchudi/versions",
+        "path": "/v1beta1/sites/stockchudi/versions",
+        "href": "https://firebasehosting.googleapis.com/v1beta1/sites/stockchudi/versions"
+      },
+      "method": "POST"
+    }
+  }
+}
+[debug] [2019-08-21T15:43:01.954Z] ----------------------------------------------------------------------
+[debug] [2019-08-21T15:43:01.958Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\iPassionDev02\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2019-08-21T15:43:01.959Z] CLI Version:   7.2.1
+[debug] [2019-08-21T15:43:01.959Z] Platform:      win32
+[debug] [2019-08-21T15:43:01.959Z] Node Version:  v10.15.3
+[debug] [2019-08-21T15:43:01.964Z] Time:          Wed Aug 21 2019 22:43:01 GMT+0700 (GMT+07:00)
+[debug] [2019-08-21T15:43:01.965Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-08-21T15:43:01.990Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-08-21T15:43:01.991Z] > authorizing via signed-in user
+[debug] [2019-08-21T15:43:01.992Z] [iam] checking project stockchudi for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-08-21T15:43:02.000Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/stockchudi:testIamPermissions  
+
+[debug] [2019-08-21T15:43:04.062Z] <<< HTTP RESPONSE 200
+[debug] [2019-08-21T15:43:04.069Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/stockchudi  
+ 
+[debug] [2019-08-21T15:43:04.688Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'stockchudi'...
+[info] 
+[info] i  deploying hosting
+[debug] [2019-08-21T15:43:04.712Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/stockchudi/versions  
+
+[debug] [2019-08-21T15:43:06.593Z] <<< HTTP RESPONSE 500
+[debug] [2019-08-21T15:43:06.593Z] <<< HTTP RESPONSE BODY
+[error] 
+[error] Error: HTTP Error: 500, Internal error encountered.
+[debug] [2019-08-21T15:43:06.981Z] Error Context: {
+  "body": {
+    "error": {
+      "code": 500,
+      "message": "Internal error encountered.",
+      "status": "INTERNAL"
+    }
+  },
+  "response": {
+    "statusCode": 500,
+    "body": {
+      "error": {
+        "code": 500,
+        "message": "Internal error encountered.",
+        "status": "INTERNAL"
+      }
+    },
+    "headers": {
+      "vary": "X-Origin, Referer, Origin,Accept-Encoding",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 21 Aug 2019 15:43:06 GMT",
+      "server": "ESF",
+      "cache-control": "private",
+      "x-xss-protection": "0",
+      "x-frame-options": "SAMEORIGIN",
+      "x-content-type-options": "nosniff",
+      "alt-svc": "quic=\":443\"; ma=2592000; v=\"46,43,39\"",
+      "accept-ranges": "none",
+      "transfer-encoding": "chunked"
+    },
+    "request": {
+      "uri": {
+        "protocol": "https:",
+        "slashes": true,
+        "auth": null,
+        "host": "firebasehosting.googleapis.com",
+        "port": 443,
+        "hostname": "firebasehosting.googleapis.com",
+        "hash": null,
+        "search": null,
+        "query": null,
+        "pathname": "/v1beta1/sites/stockchudi/versions",
+        "path": "/v1beta1/sites/stockchudi/versions",
+        "href": "https://firebasehosting.googleapis.com/v1beta1/sites/stockchudi/versions"
+      },
+      "method": "POST"
+    }
+  }
+}
+[debug] [2019-08-21T15:43:28.708Z] ----------------------------------------------------------------------
+[debug] [2019-08-21T15:43:28.713Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\iPassionDev02\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2019-08-21T15:43:28.713Z] CLI Version:   7.2.1
+[debug] [2019-08-21T15:43:28.714Z] Platform:      win32
+[debug] [2019-08-21T15:43:28.714Z] Node Version:  v10.15.3
+[debug] [2019-08-21T15:43:28.716Z] Time:          Wed Aug 21 2019 22:43:28 GMT+0700 (GMT+07:00)
+[debug] [2019-08-21T15:43:28.716Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-08-21T15:43:28.734Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-08-21T15:43:28.735Z] > authorizing via signed-in user
+[debug] [2019-08-21T15:43:28.736Z] [iam] checking project stockchudi for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-08-21T15:43:28.740Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/stockchudi:testIamPermissions  
+
+[debug] [2019-08-21T15:43:30.479Z] <<< HTTP RESPONSE 200
+[debug] [2019-08-21T15:43:30.488Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/stockchudi  
+ 
+[debug] [2019-08-21T15:43:31.106Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'stockchudi'...
+[info] 
+[info] i  deploying hosting
+[debug] [2019-08-21T15:43:31.125Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/stockchudi/versions  
+
+[debug] [2019-08-21T15:43:33.085Z] <<< HTTP RESPONSE 500
+[debug] [2019-08-21T15:43:33.085Z] <<< HTTP RESPONSE BODY
+[error] 
+[error] Error: HTTP Error: 500, Internal error encountered.
+[debug] [2019-08-21T15:43:33.451Z] Error Context: {
+  "body": {
+    "error": {
+      "code": 500,
+      "message": "Internal error encountered.",
+      "status": "INTERNAL"
+    }
+  },
+  "response": {
+    "statusCode": 500,
+    "body": {
+      "error": {
+        "code": 500,
+        "message": "Internal error encountered.",
+        "status": "INTERNAL"
+      }
+    },
+    "headers": {
+      "vary": "X-Origin, Referer, Origin,Accept-Encoding",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 21 Aug 2019 15:43:33 GMT",
+      "server": "ESF",
+      "cache-control": "private",
+      "x-xss-protection": "0",
+      "x-frame-options": "SAMEORIGIN",
+      "x-content-type-options": "nosniff",
+      "alt-svc": "quic=\":443\"; ma=2592000; v=\"46,43,39\"",
+      "accept-ranges": "none",
+      "transfer-encoding": "chunked"
+    },
+    "request": {
+      "uri": {
+        "protocol": "https:",
+        "slashes": true,
+        "auth": null,
+        "host": "firebasehosting.googleapis.com",
+        "port": 443,
+        "hostname": "firebasehosting.googleapis.com",
+        "hash": null,
+        "search": null,
+        "query": null,
+        "pathname": "/v1beta1/sites/stockchudi/versions",
+        "path": "/v1beta1/sites/stockchudi/versions",
+        "href": "https://firebasehosting.googleapis.com/v1beta1/sites/stockchudi/versions"
+      },
+      "method": "POST"
+    }
+  }
+}

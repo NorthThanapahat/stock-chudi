@@ -1,0 +1,8 @@
+<h1 mat-dialog-title class="text-center">{{data.title}}</h1>
+<div mat-dialog-content>
+  <p class="text-center"><b>{{data.body}}</b></p>
+</div>
+<div mat-dialog-actions class="justify-content-center row col-6 offset-3">
+  <button class="form-control btn btn-theme  col-5" mat-button (click)="ok()" cdkFocusInitial>ตกลง</button>
+  <button class="form-control btn  col-5 offset-2" mat-button (click)="onNoClick()" cdkFocusInitial>ปิด</button>
+</div>
