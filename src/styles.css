@@ -650,7 +650,11 @@ a:hover {
   position: absolute !important;
   top: 0;
 }
-
+/* .modal-product{
+  max-width: 100vw!important;
+  position: absolute !important;
+  top: 0;
+} */
 .mymodal>.modal-content>.modal-body {
   background: rgb(255, 241, 246);
 }
@@ -922,6 +926,9 @@ input:checked+.slider:before {
   }
   .popup-modal {
     width: 60%;
+  }
+  .margin-top-10-m{
+    margin-top: 10px;
   }
 }
 

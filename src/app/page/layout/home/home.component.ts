@@ -29,10 +29,11 @@ export class HomeComponent implements OnInit {
   saleDate: Date;
   shippingDate: Date;
   isInsert: boolean = false;
+  allProduct: Array<any>;
   lastKey: string = '';
   filter = {
     productType: '',
-
+    status: ''
   }
   err = {
     productImageName: false,
@@ -46,9 +47,12 @@ export class HomeComponent implements OnInit {
     customerRef: false,
     saleDate: false,
     trackingNumber: false,
+    shippingType: false,
     shippingDate: false,
+    appointmentPoint: false,
     isErr: false,
-    remark:false  }
+    remark: false
+  }
   productList: Array<any>;
   constructor(private db: AngularFireDatabase,
     private uploadimgService: UploadImageService,
@@ -67,15 +71,17 @@ export class HomeComponent implements OnInit {
     // })
     this.util.ShowLoading();
     this.GetProductType();
+    this.allProduct = [];
 
-
-
+    this.filter.status = 'all'
 
 
 
     console.log('productTypeList=>', this.productTypeList);
     console.log('productList=>', this.productList);
+    console.log('alldata=>', this.allData);
   }
+
   GetProductType() {
     this.db.list('/ProductType').snapshotChanges().forEach(productType => {
       console.log(productType)
@@ -123,7 +129,12 @@ export class HomeComponent implements OnInit {
         }
       }
       this.lastKey = this.productList[this.productList.length - 1].data.productId;
-
+      for (let item of this.allData) {
+        this.allProduct = _.concat(this.allProduct, item.data)
+      }
+      console.log('allProduct=>', this.allProduct);
+      console.log('productList=>', this.productList);
+      console.log('alldata=>', this.allData);
     });
   }
   FilterProductType() {
@@ -132,7 +143,6 @@ export class HomeComponent implements OnInit {
     for (let item of this.allData) {
       if (item.type == this.filter.productType) {
         this.productList = item.data;
-        this.lastKey = this.productList[this.productList.length - 1].data.productId;
         isSetProductList = true;
       }
     }
@@ -142,8 +152,45 @@ export class HomeComponent implements OnInit {
 
   }
 
-  SearchItem(value) {
+  filterOnKeyUpSearch(itemType, value) {
+    return itemType.filter((item) => {
+      return item.data.productId.toLowerCase().indexOf(value.toLowerCase()) > -1;
+    });
+  }
 
+  filterStatusChange(itemType, value) {
+    if (value == 'soleout') {
+      return itemType.filter((item) => {
+        return item.data.isCustomer == true && item.data.isPaid == true;
+      });
+    }
+    if (value == 'customer') {
+      return itemType.filter((item) => {
+        return item.data.isCustomer == true && item.data.isPaid == false;
+      });
+    }
+
+    if (value == 'noCustomer') {
+      return itemType.filter((item) => {
+        return item.data.isCustomer == false;
+      });
+    }
+
+  }
+  FilterStatus() {
+    console.log(this.filter.status)
+    if (this.filter.status == 'all') {
+      this.FilterProductType();
+    } else {
+      this.productList = this.filterStatusChange(this.allProduct, this.filter.status);
+    }
+
+  }
+  SearchItem(value) {
+    console.log(value)
+
+    console.log()
+    this.productList = this.filterOnKeyUpSearch(this.allProduct, value);
   }
   shippingDateEvent(type, value) {
     this.shippingDate = value;
@@ -205,7 +252,8 @@ export class HomeComponent implements OnInit {
     this.product = new Product();
     this.product.customerRef = 'กรุณาเลือก'
     this.product.productType = this.productTypeList[0].id;
-    this.product.productId = this.lastKey.substring(0,2)+(Number.parseInt(this.lastKey.substring(2)) + 1).toString().trim();
+    this.product.productId = this.lastKey.substring(0, 2) + (Number.parseInt(this.lastKey.substring(2)) + 1).toString().trim();
+    this.product.shippingType = '0';
     this.SetData();
     this.openModal();
   }
@@ -228,6 +276,10 @@ export class HomeComponent implements OnInit {
     this.selectedFile = null;
     this.product.customerRef = 'กรุณาเลือก'
     this.product.productType = this.productTypeList[0].id;
+    Object.entries(this.err).forEach(([key, value]) => {
+      this.err[key] = false;
+    })
+    console.log(this.err);
   }
 
   Delete(item) {
@@ -265,9 +317,13 @@ export class HomeComponent implements OnInit {
     for (let item of this.allData) {
       if (item.type == value) {
         this.lastKey = item.data[item.data.length - 1].data.productId;
-        this.product.productId = this.lastKey.substring(0,2)+(Number.parseInt(this.lastKey.substring(2)) + 1).toString().trim();
+        this.product.productId = this.lastKey.substring(0, 2) + (Number.parseInt(this.lastKey.substring(2)) + 1).toString().trim();
       }
     }
+  }
+  SelectShippingType(value) {
+    console.log(value);
+    console.log(this.product.shippingType)
   }
   CloseModal() {
     this.modalService.close(this.modalRef);
@@ -276,7 +332,7 @@ export class HomeComponent implements OnInit {
   openModal() {
     this.modalRef = this.modalService.open(this.myModal, {
       size: "lg",
-      modalClass: 'mymodal',
+      modalClass: 'modal-product',
       hideCloseButton: true,
       centered: false,
       backdrop: true,
@@ -321,13 +377,7 @@ export class HomeComponent implements OnInit {
       if (this.product.customerName == '') {
         this.err.customerName = this.SetErr();
       }
-      if (this.product.customerAddress == '') {
-        this.err.customerAddress = this.SetErr();
-      }
 
-      if (this.product.customerPhoneNumber == '') {
-        this.err.customerPhoneNumber = this.SetErr();
-      }
       if (this.product.customerRef == 'กรุณาเลือก') {
         this.err.customerRef = this.SetErr();
       }
@@ -345,16 +395,43 @@ export class HomeComponent implements OnInit {
     }
     if (this.product.isCustomer) {
       if (this.product.isPaid) {
-        if (this.product.isShipping) {
+        if (this.product.shippingType == 'shipp01') {
+          if (this.product.appointmentPoint == '') {
+            this.err.appointmentPoint = this.SetErr();
+          }
+        }
+        if (this.product.shippingDate == 'shipp02') {
+          if (this.product.customerAddress == '') {
+            this.err.customerAddress = this.SetErr();
+          }
+
+          if (this.product.customerPhoneNumber == '') {
+            this.err.customerPhoneNumber = this.SetErr();
+          }
+        }
+        if (this.product.isShipping && this.product.shippingType == 'shipp02') {
           if (this.product.trackingNumber == '') {
             this.err.trackingNumber = this.SetErr();
           }
+
 
           if (this.product.shippingDate == '') {
             this.err.shippingDate = this.SetErr();
           }
         }
+      }else{
+        
       }
+    }else{
+      this.product.isPaid = false;
+      this.product.customerName = '';
+      this.product.customerAddress = ''
+      this.product.customerRef = 'กรุณาเลือก';
+      this.product.saleDate = '';
+      this.product.shippingType = '0';
+      this.product.appointmentPoint = '';
+      this.product.isShipping = false;
+
     }
 
     if (!this.isInsert) {
@@ -425,14 +502,16 @@ export class Product {
   productImageUrl: string = '';
   isCustomer: boolean = false;
   isPaid: boolean = false;
+  shippingType: string = '';
   isShipping: boolean = false;
+  appointmentPoint: string = '';
   customerName: string = '';
   customerAddress: string = '';
   customerPhoneNumber: string = '';
   customerRef: string = '';
   saleDate: string = '';
   trackingNumber: string = '';
-  remark :string = '';
+  remark: string = '';
   shippingDate: string = '';
 }
 export class ProductTypeItem {
